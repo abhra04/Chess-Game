@@ -1,12 +1,5 @@
-'''
-the main game
-author:@techwithtim
-requirements:see requirements.txt
-'''
-
 import subprocess
 import sys
-#import get_pip
 
 
 import pygame
@@ -17,7 +10,7 @@ import pickle
 pygame.font.init()
 
 board = pygame.transform.scale(pygame.image.load(os.path.join("img","board_alt.png")), (750, 750))
-chessbg = pygame.image.load(os.path.join("img", "chessbg.png"))
+chessbg = pygame.transform.scale( pygame.image.load(os.path.join("img", "chessbg.jpg")) ,(750, 750)  ) 
 rect = (113,113,525,525)
 
 turn = "w"
@@ -69,14 +62,14 @@ def redraw_gameWindow(win, bo, p1, p2, color, ready):
 
     font = pygame.font.SysFont("comicsans", 30)
     try:
-        txt = font.render(bo.p1Name + "\'s Time: " + str(formatTime2), 1, (255, 255, 255))
-        txt2 = font.render(bo.p2Name + "\'s Time: " + str(formatTime1), 1, (255,255,255))
+        txt = font.render(bo.p1Name + "\'s Time: " + str(formatTime2), 1, (0, 0, 0))
+        txt2 = font.render(bo.p2Name + "\'s Time: " + str(formatTime1), 1, (0,0,0))
     except Exception as e:
         print(e)
     win.blit(txt, (520,10))
     win.blit(txt2, (520, 700))
 
-    txt = font.render("Press q to Quit", 1, (255, 255, 255))
+    txt = font.render("Press q to Quit", 1, (0, 0, 0))
     win.blit(txt, (10, 20))
 
     if color == "s":
@@ -84,27 +77,27 @@ def redraw_gameWindow(win, bo, p1, p2, color, ready):
         win.blit(txt3, (width/2-txt3.get_width()/2, 10))
 
     if not ready:
-        show = "Waiting for Player"
+        show = "Waiting for other player"
         if color == "s":
-            show = "Waiting for Players"
+            show = "Waiting for other player"
         font = pygame.font.SysFont("comicsans", 80)
-        txt = font.render(show, 1, (255, 0, 0))
+        txt = font.render(show, 1, (0, 0, 0))
         win.blit(txt, (width/2 - txt.get_width()/2, 300))
 
     if not color == "s":
         font = pygame.font.SysFont("comicsans", 30)
         if color == "w":
-            txt3 = font.render("YOU ARE WHITE", 1, (255, 0, 0))
+            txt3 = font.render("YOU ARE WHITE", 1, (0, 0, 0))
             win.blit(txt3, (width / 2 - txt3.get_width() / 2, 10))
         else:
-            txt3 = font.render("YOU ARE BLACK", 1, (255, 0, 0))
+            txt3 = font.render("YOU ARE BLACK", 1, (0, 0, 0))
             win.blit(txt3, (width / 2 - txt3.get_width() / 2, 10))
 
         if bo.turn == color:
-            txt3 = font.render("YOUR TURN", 1, (255, 0, 0))
+            txt3 = font.render("YOUR TURN", 1, (0, 0, 0))
             win.blit(txt3, (width / 2 - txt3.get_width() / 2, 700))
         else:
-            txt3 = font.render("THEIR TURN", 1, (255, 0, 0))
+            txt3 = font.render("THEIR TURN", 1, (0, 0, 0))
             win.blit(txt3, (width / 2 - txt3.get_width() / 2, 700))
 
     pygame.display.update()
@@ -133,9 +126,6 @@ def end_screen(win, text):
 
 
 def click(pos):
-    """
-    :return: pos (x, y) in range 0-7 0-7
-    """
     x = pos[0]
     y = pos[1]
     if rect[0] < x < rect[0] + rect[2]:

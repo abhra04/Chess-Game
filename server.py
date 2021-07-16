@@ -28,16 +28,7 @@ spectartor_ids = []
 specs = 0
 
 def read_specs():
-    global spectartor_ids
-
-    spectartor_ids = []
-    try:
-        with open("specs.txt", "r") as f:
-            for line in f:
-                spectartor_ids.append(line.strip())
-    except:
-        print("[ERROR] No specs.txt file found, creating one...")
-        open("specs.txt", "w")
+    pass 
 
 
 def threaded_client(conn, game, spec=False):
@@ -186,14 +177,6 @@ while True:
             except:
                 g = 0
                 games[g] = Board(8,8)
-
-        '''if addr[0] in spectartor_ids and specs == 0:
-            spec = True
-            print("[SPECTATOR DATA] Games to view: ")
-            print("[SPECTATOR DATA]", games.keys())
-            g = 0
-            specs += 1'''
-
         print("[DATA] Number of Connections:", connections+1)
         print("[DATA] Number of Games:", len(games))
 
