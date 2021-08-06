@@ -19,10 +19,6 @@ class Network:
         self.client.close()
 
     def send(self, data, pick=False):
-        """
-        :param data: str
-        :return: str
-        """
         start_time = time.time()
         while time.time() - start_time < 5:
             try:
